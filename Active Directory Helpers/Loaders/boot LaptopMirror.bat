@@ -1,1 +1,1 @@
-powershell.exe -ExecutionPolicy Bypass -File "C:\BrooksDDA\PS\Scripts\Mirror_Asset.ps1"
+powershell.exe -ExecutionPolicy Bypass -File  "Enter the Path to the PS1"
