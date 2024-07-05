@@ -1,0 +1,6 @@
+Username       : sp\david
+Model          : Surface Pro 8
+Asset          : SP
+Serial Number  : 0F01FDA231101J
+UUID           : 0B4C6AA4-747F-5209-5BC0-5151561655DD
+Date           : 07/05/2024 01:37:53

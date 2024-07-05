@@ -22,8 +22,8 @@
 # [void]$LocalPrinterForm.ShowDialog()
 #endregion
 
-function StartUpTitle {
-    Write-Host "`n"
+function StartUpTitle{
+    Write-Host '`n'
     Write-Host '          ############    #######       ###    ##   ##        #####      ##   ##    ####       ####    ##      ##'
     Write-Host '              ###         ##          ##       ##   ##        ##   ##    ##   ##    ##  #      ##  #    ##    ##'
     Write-Host '              ###         ##         ##        ##   ##        ##    #    ##   ##    ##   #     ##   #    ##  ##'
@@ -31,15 +31,15 @@ function StartUpTitle {
     Write-Host '              ###         ##         ##        ##   ##        ##    #    ##   ##    ##    #    ##    #    ##'
     Write-Host '              ###         ##          ##       ##   ##        ##   ##    ##   ##    ##   #     ##   #    ##'
     Write-Host '              ###         #######       ###    ##   ##        #####      #######    ####       ####     ##'
-    # Function runs to show a please wait message so the rest of the script can load.
+    #Function runs to show a please wait message so the rest of the script can load. 
     stringdotAnimation
 }
 
-# Visual Helpers
-function stringdotAnimation {
-    # Variables
-    $LoadingAnimation = ""  # Holds the . being used to animate the please wait string
-    $MaxDots = 5    # max amount of dots shown before resetting. this will show 4 dots on screen
+#Visual Helpers 
+function stringdotAnimation{
+    #Variables
+    $LoadingAnimation = ""  #Holds the . being used to animate the please wait string
+    $MaxDots = 5    #max amount of dots shown before resetting. this will show 4 dots on screen
     
     # Nested Function to clear the current line
     function Clear-Line {
@@ -84,8 +84,8 @@ function stringdotAnimation {
     GreetingLogs
 }
 
-function GreetingLogs {
-    # Variables 
+function GreetingLogs{
+    #Variables 
     $GreetMessage = "Hello, I'm Your Tech Buddy, Here to help`n
     I just need to get some of your details before I start`n"
     Write-Host "$GreetMessage"
@@ -141,56 +141,47 @@ Date           : $($Data.Date)
     # Define the primary and backup file paths
     $primaryPath = "C:\Users\David\Desktop\PowerShell Projects\PowerShell_Lab\ComputerInformationLogs"
     $backupPath = "C:\Users\David\Desktop\PowerShell Projects\PowerShell_Lab\BackupLogs"
-    
+    $fileName = "$serialNumber.txt"
     $filePath = Join-Path -Path $primaryPath -ChildPath $fileName
     $backupFilePath = Join-Path -Path $backupPath -ChildPath $fileName
 
-    Write-Host "Primary path: $primaryPath"
-    Write-Host "Backup path: $backupPath"
-    Write-Host "File name: $fileName"
-    Write-Host "File path: $filePath"
-    Write-Host "Backup file path: $backupFilePath"
-
-    function bugCheckSection {
+    function bugCheckSection{
         # Check if the primary path is valid
-        if (Test-Path -Path $primaryPath) {
-            # Check if the file already exists
-            if (Test-Path -Path $filePath) {
-                Write-Host "File already exists. Updating the file."
+    if (Test-Path -Path $primaryPath) {
+        # Check if the file already exists
+        if (Test-Path -Path $filePath) {
+            Write-Host "File already exists. Updating the file."
+        } else {
+            Write-Host "File does not exist. Creating a new file."
+        }
+        # Call the StoreData function with the extracted data
+        StoreData -FilePath $filePath -Data $computerInfo
+    } else {
+        Write-Host "Primary path is invalid. Checking backup path."
+        # Check if the backup path is valid
+        if (Test-Path -Path $backupPath) {
+            Write-Host "Backup path is valid."
+            # Check if the file already exists in the backup path
+            if (Test-Path -Path $backupFilePath) {
+                Write-Host "File already exists in backup path. Updating the file."
             } else {
-                Write-Host "File does not exist. Creating a new file."
+                Write-Host "File does not exist in backup path. Creating a new file."
             }
             # Call the StoreData function with the extracted data
-            StoreData -FilePath $filePath -Data $computerInfo
+            StoreData -FilePath $backupFilePath -Data $computerInfo
         } else {
-            Write-Host "Primary path is invalid. Checking backup path."
-            # Check if the backup path is valid
-            if (Test-Path -Path $backupPath) {
-                Write-Host "Backup path is valid."
-                # Check if the file already exists in the backup path
-                if (Test-Path -Path $backupFilePath) {
-                    Write-Host "File already exists in backup path. Updating the file."
-                } else {
-                    Write-Host "File does not exist in backup path. Creating a new file."
-                }
-                # Call the StoreData function with the extracted data
-                StoreData -FilePath $backupFilePath -Data $computerInfo
-            } else {
-                Write-Host "Both primary and backup paths are invalid. Stopping the script."
-                throw "Both primary and backup paths are invalid. Script execution stopped."
-            }
+            Write-Host "Both primary and backup paths are invalid. Stopping the script."
+            throw "Both primary and backup paths are invalid. Script execution stopped."
         }
     }
-
+    }
     bugCheckSection
 }
 
-function mainRun {
+function mainRun{
     StartUpTitle
 }
-
 mainRun
-
 
 
 # ################################## END ############################################
