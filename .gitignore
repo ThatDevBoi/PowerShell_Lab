@@ -1,3 +1,4 @@
+#VMWare ignore files
 *.vmdk
 *.vmsn
 *.nvram
