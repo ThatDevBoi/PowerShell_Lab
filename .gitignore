@@ -1,1 +1,4 @@
-
+*.vmdk
+*.vmsn
+*.nvram
+*.log
