@@ -139,6 +139,7 @@ Date           : $($Data.Date)
     }
 
     # Define the primary and backup file paths
+    # Eventually this can be changed where the save path will be an Azure Blob server
     $primaryPath = "C:\Users\David\Desktop\PowerShell Projects\PowerShell_Lab\ComputerInformationLogs"
     $backupPath = "C:\Users\David\Desktop\PowerShell Projects\PowerShell_Lab\BackupLogs"
     $fileName = "$serialNumber.txt"
