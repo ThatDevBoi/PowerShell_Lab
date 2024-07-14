@@ -5,6 +5,6 @@
 *.nvram
 *.vmem
 *.log
-
+*.vmss
 # ISO files
 *.iso
